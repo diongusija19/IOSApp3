@@ -3,11 +3,19 @@ import SwiftUI
 struct SubmissionResultView: View {
     let result: SubmissionResult
 
+    private var submittedDate: String {
+        result.submittedAt.formatted(date: .abbreviated, time: .shortened)
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Label("Submission Received", systemImage: "checkmark.circle.fill")
                 .font(.headline)
                 .foregroundStyle(.green)
+
+            Text(submittedDate)
+                .font(.caption)
+                .foregroundStyle(.secondary)
 
             Text(result.message)
                 .font(.subheadline)

@@ -3,9 +3,24 @@ import SwiftUI
 
 @MainActor
 final class HuntViewModel: ObservableObject {
-    @Published var items: [HuntItem] = HuntViewModel.sampleItems
+    @Published var items: [HuntItem]
     @Published var isSubmitting = false
     @Published var submissionResult: SubmissionResult?
+    @Published var submissionHistory: [SubmissionResult]
+
+    private let progressStore: HuntProgressStore
+
+    init(progressStore: HuntProgressStore = HuntProgressStore()) {
+        self.progressStore = progressStore
+
+        let savedPhotos = progressStore.loadPhotos()
+        items = HuntViewModel.sampleItems.map { item in
+            var restoredItem = item
+            restoredItem.photoData = savedPhotos[item.id]
+            return restoredItem
+        }
+        submissionHistory = progressStore.loadSubmissions()
+    }
 
     var foundCount: Int {
         items.filter(\.isFound).count
@@ -19,12 +34,40 @@ final class HuntViewModel: ObservableObject {
         foundCount > 0 && !isSubmitting
     }
 
+    var nextRewardText: String {
+        switch foundCount {
+        case 0...4:
+            return "Find \(5 - foundCount) more item(s) to unlock a 10% discount."
+        case 5...6:
+            return "Find \(7 - foundCount) more item(s) to upgrade to 20% off."
+        case 7...9:
+            return "Find \(10 - foundCount) more item(s) to enter the $5000 grand prize draw."
+        default:
+            return "All rewards unlocked. Submit your hunt for final review."
+        }
+    }
+
+    var currentRewardText: String {
+        switch foundCount {
+        case 10:
+            return "20% discount + grand prize entry"
+        case 7...9:
+            return "20% discount"
+        case 5...6:
+            return "10% discount"
+        default:
+            return "No discount yet"
+        }
+    }
+
     func addPhoto(_ data: Data, to item: HuntItem) {
         guard let index = items.firstIndex(where: { $0.id == item.id }) else {
             return
         }
 
         items[index].photoData = data
+        submissionResult = nil
+        saveProgress()
     }
 
     func clearPhoto(for item: HuntItem) {
@@ -33,20 +76,49 @@ final class HuntViewModel: ObservableObject {
         }
 
         items[index].photoData = nil
+        submissionResult = nil
+        saveProgress()
+    }
+
+    func resetHunt() {
+        items = items.map { item in
+            var resetItem = item
+            resetItem.photoData = nil
+            return resetItem
+        }
+        submissionResult = nil
+        saveProgress()
     }
 
     func submitResults() async {
         isSubmitting = true
         submissionResult = nil
 
-        // Simulates sending the player's photo evidence to an online submission endpoint.
+        // This simulates the online handoff. A real app would upload each proof photo,
+        // then trust the server to verify images before returning the final reward.
         try? await Task.sleep(for: .seconds(1))
 
-        submissionResult = makeSubmissionResult()
+        let result = makeSubmissionResult()
+        submissionResult = result
+        submissionHistory.insert(result, at: 0)
+        saveProgress()
         isSubmitting = false
     }
 
+    private func saveProgress() {
+        let photosByItemID: [Int: Data] = Dictionary(uniqueKeysWithValues: items.compactMap { item -> (Int, Data)? in
+            guard let photoData = item.photoData else {
+                return nil
+            }
+
+            return (item.id, photoData)
+        })
+
+        progressStore.save(photosByItemID: photosByItemID, submissions: submissionHistory)
+    }
+
     private func makeSubmissionResult() -> SubmissionResult {
+        // Reward tiers come directly from the assignment brief.
         switch foundCount {
         case 10:
             return SubmissionResult(

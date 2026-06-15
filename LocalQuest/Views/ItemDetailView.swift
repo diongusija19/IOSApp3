@@ -30,6 +30,7 @@ struct ItemDetailView: View {
             }
 
             viewModel.addPhoto(data, to: item)
+            capturedImage = nil
         }
     }
 
@@ -63,12 +64,21 @@ struct ItemDetailView: View {
                     .frame(height: 240)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
 
-                Button(role: .destructive) {
-                    viewModel.clearPhoto(for: item)
-                } label: {
-                    Label("Retake Photo", systemImage: "arrow.triangle.2.circlepath.camera")
+                HStack {
+                    Button {
+                        isShowingCamera = true
+                    } label: {
+                        Label("Retake Photo", systemImage: "arrow.triangle.2.circlepath.camera")
+                    }
+                    .buttonStyle(.borderedProminent)
+
+                    Button(role: .destructive) {
+                        viewModel.clearPhoto(for: item)
+                    } label: {
+                        Label("Remove", systemImage: "trash")
+                    }
+                    .buttonStyle(.bordered)
                 }
-                .buttonStyle(.bordered)
             } else {
                 VStack(spacing: 10) {
                     Image(systemName: "camera.fill")

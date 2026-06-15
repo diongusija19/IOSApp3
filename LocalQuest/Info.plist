@@ -22,6 +22,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>LocalQuest uses the camera so players can photograph scavenger hunt items they find at participating businesses.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>LocalQuest can use the photo library when running in the simulator because the simulator does not provide a hardware camera.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

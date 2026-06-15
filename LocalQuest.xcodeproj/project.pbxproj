@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3C2A9D5F694D983B091A1DFF /* SubmissionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906A36372B09516831735A5E /* SubmissionResult.swift */; };
+		4D82B0E8A073B9C73224C867 /* HuntProgressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA52F8E4F161CDD93A04E02 /* HuntProgressStore.swift */; };
 		7B507B216CB89D06E396C3B2 /* HuntItemRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADCFAF6F789A285ED2AFBA0 /* HuntItemRowView.swift */; };
 		8C7A2111A4EC02CBFF40A0BC /* SubmissionResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372CFEA6BF4D00203FE5B494 /* SubmissionResultView.swift */; };
 		8DEF72007511AA87012228C7 /* LocalQuestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13962220B788484E5CAC90BC /* LocalQuestApp.swift */; };
@@ -33,6 +34,7 @@
 		82B77556D9767417E1A4DD90 /* LocalQuest.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = LocalQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		906A36372B09516831735A5E /* SubmissionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionResult.swift; sourceTree = "<group>"; };
 		ADD81CAB40DC21999AEAEFAD /* HuntItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntItem.swift; sourceTree = "<group>"; };
+		CDA52F8E4F161CDD93A04E02 /* HuntProgressStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntProgressStore.swift; sourceTree = "<group>"; };
 		F67528072D726FCDFFAE275C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F74DFBA8430214830D1FB595 /* CameraPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPicker.swift; sourceTree = "<group>"; };
 		F7A762620965C664F9080AE6 /* SubmissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionView.swift; sourceTree = "<group>"; };
@@ -70,6 +72,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		9202CB9220BE811DA8F778EF /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				CDA52F8E4F161CDD93A04E02 /* HuntProgressStore.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		ED8B283031F4321B7E7CCF3F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +95,7 @@
 				45D54D1461D3E6BB4D3C43E7 /* Info.plist */,
 				13962220B788484E5CAC90BC /* LocalQuestApp.swift */,
 				02223A261DBC0BBC52094B60 /* Models */,
+				9202CB9220BE811DA8F778EF /* Services */,
 				ED8B283031F4321B7E7CCF3F /* ViewModels */,
 				63E8464D428C1F102AFBFFD8 /* Views */,
 			);
@@ -162,6 +173,7 @@
 				C73AB2ED864F38C6F210AEB7 /* HuntItem.swift in Sources */,
 				7B507B216CB89D06E396C3B2 /* HuntItemRowView.swift in Sources */,
 				CD0850E8D9E0674629903E7A /* HuntListView.swift in Sources */,
+				4D82B0E8A073B9C73224C867 /* HuntProgressStore.swift in Sources */,
 				D6FE16DB94EACCC73FEB382B /* HuntViewModel.swift in Sources */,
 				B5DB4FB38034A7383CECB68D /* ItemDetailView.swift in Sources */,
 				8DEF72007511AA87012228C7 /* LocalQuestApp.swift in Sources */,

@@ -28,9 +28,15 @@ struct ProgressHeaderView: View {
             ProgressView(value: progress)
                 .tint(.green)
 
-            Text("Photograph hidden items at local businesses. Submit at least 5 finds for 10% off, 7 for 20% off, and all 10 for the grand prize draw.")
-                .font(.footnote)
-                .foregroundStyle(.secondary)
+            VStack(alignment: .leading, spacing: 6) {
+                Label(viewModel.currentRewardText, systemImage: "ticket.fill")
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.green)
+
+                Text(viewModel.nextRewardText)
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+            }
         }
         .padding()
         .background(.green.opacity(0.08), in: RoundedRectangle(cornerRadius: 8))
