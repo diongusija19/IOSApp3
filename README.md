@@ -1,6 +1,6 @@
 # IOSApp3 - LocalQuest
 
-Assignment 3 project for iOS Development.
+Assignment nr 4 project for iOS Development.
 
 LocalQuest is a SwiftUI scavenger hunt app for a city Chamber of Commerce. It helps players visit 10 participating local businesses, read clues, capture proof photos, and submit their results for discount codes and grand prize eligibility.
 
